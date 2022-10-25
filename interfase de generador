@@ -1,0 +1,37 @@
+import tkinter as tk
+from tkinter import ttk
+import contraseña
+
+ANCHO=500
+ALTO=200
+
+app=tk.Tk()
+app.title("Generador de contraseña")
+app.config(width=ANCHO, height=ALTO)
+app.resizable(0, 0)
+MAX_LENGTH=64
+contra=tk.StringVar()
+def cambio():
+    try:
+        cantidad= abs(int(text_input.get()))
+        if cantidad < MAX_LENGTH:
+            contra.set(contraseña.generador_contraseñas(cantidad)) #guardar dentro de contra con .set
+        else:
+            contra.set(contraseña.generador_contraseñas(MAX_LENGTH))
+
+    except Exception as e:
+         contra.set("¡ERROR!. Ingrese un número válido.")
+         print(f"ERROR: {e}")
+
+text1=ttk.Label(text=f"Longitud de la contraseña (Max{MAX_LENGTH}): ")
+text1.place(x=20, y=20)
+text_input=ttk.Entry(width=4)
+text_input.place(x=270, y=20)
+btn_gen= ttk.Button(text="generar contraseña",command = cambio)
+btn_gen.place(x=20, y=110)
+
+text2=ttk.Label(app, textvariable=contra) #muestra lo que esta dentro de contra con .get
+text2.place(x=270, y=120)
+
+
+app.mainloop()
