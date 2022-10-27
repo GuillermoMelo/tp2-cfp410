@@ -6,9 +6,11 @@ CARPETA = "videos YouTube"
 
 def descarga (link):
 
-    yt = YouTube(link) 
+    yt = YouTube(link)
 
-    d_video = yt.streams.get_by_itag(22)
+    tags = yt.streams.get_highest_resolution()
+
+    d_video = yt.streams.get_by_itag(tags.itag)
 
     d_video.download(CARPETA) 
 
