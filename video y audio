@@ -1,0 +1,24 @@
+from os import link
+from pytube import YouTube 
+# La carpeta donde se guardará
+CARPETA = "videos YouTube"  
+# Link del video a descargar
+
+def descarga (link):
+
+    yt = YouTube(link) 
+
+    d_video = yt.streams.get_by_itag(22)
+
+    d_video.download(CARPETA) 
+
+def escuchar(link):
+    yt=YouTube(link)
+    t=yt.streams.filter(only_audio=True).first()
+    t.download(CARPETA)
+
+if __name__ == '__main__':
+    link=input("ingrese URL de YouTube: ")
+
+    descarga(link)
+    escuchar(link)
